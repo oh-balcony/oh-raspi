@@ -20,5 +20,5 @@ Additionally the SPI kernel module will need to be enabled. Start the Raspberry 
 
     sudo raspi-config
 
-and select `Advanced Options` and then `SPI`.
+and select `Advanced Options` and then `SPI`. Afterwards the Pi will need to be rebooted for the changes to take effect.
 
