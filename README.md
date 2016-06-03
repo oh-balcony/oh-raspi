@@ -8,7 +8,7 @@ Python 3:
 
     sudo apt-get install python3
 
-Python [gpiozero library])(http://gpiozero.readthedocs.io):
+Python [gpiozero library](http://gpiozero.readthedocs.io):
 
     sudo apt-get install python3-gpiozero
 
