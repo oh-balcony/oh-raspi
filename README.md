@@ -6,7 +6,7 @@ Python code for my Raspberry Pi to control the watering of plants on my balcony.
 
 Python 3:
 
-      sudo apt-get install python3
+    sudo apt-get install python3
 
 Python [gpiozero library])(http://gpiozero.readthedocs.io):
 
