@@ -12,7 +12,7 @@ Python [gpiozero library](http://gpiozero.readthedocs.io):
 
     sudo apt-get install python3-gpiozero
 
-Python spidev library, which is needed for hardware accelerated SPI. It will also work without, but reading Soil Moisture sensors through an MCP3008 Analog-Digital Converter (ADC) will be a little slower (I measured 1.4ms instead of 0.04ms per reading)
+Python spidev library, which is needed for hardware accelerated SPI. It will also work without, but reading Soil Moisture sensors through an MCP3008 Analog-Digital Converter (ADC) will be a little slower (I measured 1.4ms instead of 0.04ms per reading):
 
     sudo apt-get install python3-spidev
 
