@@ -1,45 +1,14 @@
 #!/usr/bin/env python3
 
-from gpiozero import DigitalOutputDevice, MCP3008
 from time import sleep, clock
 from pprint import pprint
 from statistics import median
 
-
-class Pump(DigitalOutputDevice):
-    """
-        A water pump controlled by a relay.
-
-        Relays are usually active on low.
-    """
-    def __init__(self, pin=None, active_high=False, initial_value=False):
-        super(Pump, self).__init__(pin, active_high, initial_value)
-
-# Empirical values for Moisture sensors:
-# Moisture sensor v1.4 (Conrad)
-#   Air:                 0
-#   Sand/Earth dry:      0.01
-#   Skin:                0.06
-#   Earth almost dry:    0.07
-#   Sand/Earth wet:      0.12
-#   Earth wet:           0.42
-#   Sand/Earth very wet: 0.45
-#   Water:               0.46
-#   Wired:               0.73
-
-moisture_sensors = {
-    # Moisture sensor v1.4 (Conrad)
-    "moisture1": MCP3008(channel=0),
-
-    # TODO connect additional moisture sensors
-    # "moisture2": MCP3008(channel=1)
-}
-
-# time interval for sending moisture measurements to the server (seconds)
-send_measurements_interval = 1  # seconds
-
-# number of measurements that should be aggregated before sending them to the server
-aggregated_measurements_count = 30
+try:
+    from config import *
+except ImportError:
+    print("The configuration file config.py does not exist. Have a look at config.sample.py for reference.")
+    exit(1)
 
 
 def measure_moisture(moisture_values):
@@ -85,12 +54,12 @@ def main():
         sleep_time = max(measure_interval - processing_time, 0)
         sleep(sleep_time)
 
-
 print("Oh, Balcony!")
-main()
 
 # TODO pump
 # pump = Pump(17)
 #
 # pump.on()
 # sleep(100)
+
+main()
