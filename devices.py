@@ -13,7 +13,7 @@ class Pump(DigitalOutputDevice):
 
 class MoistureSensor:
     """
-        A moisture sensor connected to a Analog-Digital-Converter chip (MCP3008 by default).
+        A moisture sensor connected to an Analog-Digital-Converter chip (MCP3008 by default).
 
         If the moisture sensor is 0 when dry then set inverse to False (default), if it is 1 when dry then set inverse
         to True.
