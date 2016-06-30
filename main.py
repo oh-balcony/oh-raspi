@@ -6,8 +6,9 @@ from statistics import median
 
 try:
     from config import *
-except ImportError:
-    print("The configuration file config.py does not exist. Have a look at config.sample.py for reference.")
+except ImportError as err:
+    print("The configuration file config.py does not exist. Have a look at config.sample.py for reference. (" + str(err)
+          + ")")
     exit(1)
 
 
@@ -56,10 +57,30 @@ def main():
 
 print("Oh, Balcony!")
 
-# TODO pump
+# TODO
 # pump = Pump(17)
 #
 # pump.on()
 # sleep(100)
+
+# valve = Valve(17)
+# print("Initial")
+# sleep(2)
+# while True:
+#     print("Close")
+#     valve.close()
+#     sleep(2)
+#     print("Open")
+#     valve.open()
+#     sleep(2)
+
+# float_switch = FloatSwitch(27, active_wet=False)
+# while True:
+#     print("Wet? " + str(float_switch.is_wet()))
+#     sleep(0.5)
+
+# while True:
+#     print(water_levels["tank1"].value)
+#     sleep(0.2)
 
 main()

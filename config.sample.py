@@ -20,6 +20,14 @@ moisture_sensors = {
 #   Water:               0.46
 #   Wired:               0.73
 
+water_levels = {
+    "tank1": WaterLevel([
+        FloatSwitch(pin=27, height=0),
+        FloatSwitch(pin=22, height=50),
+        FloatSwitch(pin=5, height=100)
+    ])
+}
+
 # time interval for sending moisture measurements to the server (seconds)
 send_measurements_interval = 1  # seconds
 
