@@ -72,6 +72,8 @@ class FloatSwitch:
     """
     A binary float switch to measure the water level in a water tank.
 
+    It can be either wet (under water) or dry (above water).
+
     Connect one side of the switch to a ground pin, and the other to any GPIO
     pin. Alternatively, connect one side of the switch to a 3V3 pin, and the
     other to any GPIO pin, then set *pull_up* to ``False`` in the constructor.
