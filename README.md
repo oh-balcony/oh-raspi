@@ -11,6 +11,10 @@ The following additional software packages will be required:
 Python 3:
 
     sudo apt-get install python3
+    
+Python [requests HTTP library](http://docs.python-requests.org):
+
+    sudo apt-get install python3-requests
 
 Python [gpiozero library](http://gpiozero.readthedocs.io):
 
