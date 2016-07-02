@@ -3,6 +3,8 @@
 from time import sleep, clock
 from pprint import pprint
 from statistics import median
+import json
+import requests
 
 try:
     from config import *
@@ -28,8 +30,16 @@ def clear_values_map(values_map):
 
 
 def store(aggregated_values):
-    pprint(aggregated_values)
-    # TODO send to server
+    #pprint(aggregated_values)
+
+    # TODO make configurable
+    url = 'http://10.0.0.219:8080/store'
+    payload = {"sensorData": aggregated_values}
+    headers = {'content-type': 'application/json'}
+
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    pprint(response.json())
 
 
 def main():

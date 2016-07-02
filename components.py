@@ -44,28 +44,26 @@ class Valve:
 
 class MoistureSensor:
     """
-    A moisture sensor connected to an Analog-Digital-Converter chip.
+    A moisture sensor connected to an Analog-Digital-Converter (ADC) chip.
 
-    :param int channel:
-        The channel to read data from. The MCP3008/3208/3304 ADC chips have 8 channels (0-7), while the
-        MCP3004/3204/3302 have 4 channels (0-3), and the MCP3301 only has 1 channel.
+    :param AnalogInputDevice input_device:
+        The input channel of your ADC-chip, e.g. MCP3008(channel=0)
+        Have a look at the documentation of gpiozero for a list of all available ADC chips and their parameters:
+        http://gpiozero.readthedocs.io/en/latest/api_spi.html
 
     :param bool inverse:
         If the moisture sensor is 0 when dry then set to False (default), if it is 1 when dry then set to True.
-
-    :param AnalogInputDevice chip:
-        The Analog-Digital-Converter (ADC) chip (default MCP3008).
     """
-    def __init__(self, channel: int = 0, inverse: bool = False, chip: AnalogInputDevice = MCP3008):
-        self._sensor = chip(channel=channel)
+    def __init__(self, input_device: AnalogInputDevice, inverse: bool = False):
+        self.input_device = input_device
         self.inverse = inverse
 
     @property
     def value(self) -> float:
         if self.inverse:
-            return 1 - self._sensor.value
+            return 1 - self.input_device.value
         else:
-            return self._sensor.value
+            return self.input_device.value
 
 
 class FloatSwitch:
