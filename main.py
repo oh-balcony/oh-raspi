@@ -20,6 +20,8 @@ except ImportError as err:
 def main():
     print("Oh, Balcony!")
 
+    all_off()
+
     # time between two measurements (seconds)
     measure_interval = send_measurements_interval / aggregated_measurements_count
 
@@ -41,6 +43,14 @@ def main():
         processing_time = clock() - start_time
         sleep_time = max(measure_interval - processing_time, 0)
         sleep(sleep_time)
+
+
+def all_off():
+    for pump in pumps.values():
+        pump.off()
+
+    for valve in valves.values():
+        valve.close()
 
 
 def measure_moisture(moisture_values):
