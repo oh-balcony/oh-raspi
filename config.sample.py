@@ -17,10 +17,10 @@ moisture_sensors = {
     "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
     "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
     "moisture2": MoistureSensor(MCP3008(channel=2), inverse=True),
-    "moisture3": MoistureSensor(MCP3008(channel=3), inverse=True),
-    "moisture4": MoistureSensor(MCP3008(channel=4), inverse=True),
-    "moisture5": MoistureSensor(MCP3008(channel=5), inverse=True),
-    "moisture6": MoistureSensor(MCP3008(channel=6), inverse=True),
+    # "moisture3": MoistureSensor(MCP3008(channel=3), inverse=True),
+    # "moisture4": MoistureSensor(MCP3008(channel=4), inverse=True),
+    # "moisture5": MoistureSensor(MCP3008(channel=5), inverse=True),
+    # "moisture6": MoistureSensor(MCP3008(channel=6), inverse=True),
 
     # Moisture sensor v1.4 (Conrad), connected via MCP3008 ADC channel 7, 0.0 when dry
     "moisture7": MoistureSensor(MCP3008(channel=7))
@@ -38,6 +38,20 @@ moisture_sensors = {
 #   Water:               0.46
 #   Wired:               0.73
 
+# Pumps
+# See class Pump in components.py for all possible parameters.
+pumps = {
+    "pump1": Pump(18)
+}
+
+# Valves controlling the flow of water
+# See class Valve in components.py for all possible parameters.
+valves = {
+    "valve1": Valve(17)
+}
+
+# Tanks with installed float switches for measuring the water level
+# See class WaterLevel and FloatSwitch in components.py for all possible parameters.
 water_levels = {
     "tank1": WaterLevel([
         FloatSwitch(pin=27, height=0),
@@ -46,8 +60,11 @@ water_levels = {
     ])
 }
 
+# Web Service endpoint
+service_base_url = "http://lavendulus:8080"
+
 # time interval for sending moisture measurements to the server (seconds)
-send_measurements_interval = 1  # seconds
+send_measurements_interval = 300  # seconds
 
 # number of measurements that should be aggregated before sending them to the server
 aggregated_measurements_count = 30
