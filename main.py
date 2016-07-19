@@ -69,7 +69,23 @@ def clear_values_map(values_map):
 
 
 def store(aggregated_values):
-    payload = {"sensorData": aggregated_values}
+
+    water_level_values = {name: water_level.value for name, water_level in water_levels.items()}
+    pump_values = {name: pump.is_active for name, pump in pumps.items()}
+    valve_values = {name: valve.is_open for name, valve in valves.items()}
+
+    payload = {"moisture": aggregated_values,
+               "tanks": water_level_values,
+               "pumps": pump_values,
+               "valves": valve_values}
+
+    # debugging output for float switches
+    # for name, water_level in water_levels.items():
+    #     print(name + ": ")
+    #     pprint(water_level.float_switch_values)
+    # pprint(water_level_values)
+
+    pprint(payload)
 
     send(payload)
 
@@ -77,7 +93,7 @@ def store(aggregated_values):
 def send(payload):
     headers = {'content-type': 'application/json'}
     try:
-        response = requests.post(get_service_endpoint("store"), data=json.dumps(payload), headers=headers)
+        response = requests.post(get_service_endpoint("store"), data=json.dumps(payload), headers=headers, timeout=5.0)
         response.raise_for_status()
 
         pprint(response.json())

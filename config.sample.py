@@ -54,9 +54,9 @@ valves = {
 # See class WaterLevel and FloatSwitch in components.py for all possible parameters.
 water_levels = {
     "tank1": WaterLevel([
-        FloatSwitch(pin=27, height=0),
-        FloatSwitch(pin=22, height=50),
-        FloatSwitch(pin=5, height=100)
+        FloatSwitch(pin=16, height=0),
+        FloatSwitch(pin=20, height=50),
+        FloatSwitch(pin=21, height=100)
     ])
 }
 

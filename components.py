@@ -41,6 +41,17 @@ class Valve:
     def close(self):
         self._relay.value = not self.active_open
 
+    @property
+    def is_open(self) -> bool:
+        if self.active_open:
+            return self._relay.value
+        else:
+            return not self._relay.value
+
+    @property
+    def is_closed(self):
+        return not self.is_open
+
 
 class MoistureSensor:
     """
@@ -85,7 +96,7 @@ class FloatSwitch:
 
     :param bool active_wet:
         Set to True if the active state (switch closed) means that the switch is under water (wet).
-        Set to False if the active state (switch closed) means that the switch is above water (dry).
+        Set to False (default) if the active state (switch closed) means that the switch is above water (dry).
 
     :param bool pull_up:
         If ``True`` (the default), the GPIO pin will be pulled high by default.
@@ -93,7 +104,7 @@ class FloatSwitch:
         ``False``, the GPIO pin will be pulled low by default. In this case,
         connect the other side of the button to 3V3.
     """
-    def __init__(self, pin: int, height: int, active_wet: bool = True, pull_up: bool = True):
+    def __init__(self, pin: int, height: int, active_wet: bool = False, pull_up: bool = True):
         self._switch = Button(pin=pin, pull_up=pull_up)
         self.active_wet = active_wet
         self.height = height
@@ -146,3 +157,7 @@ class WaterLevel:
                 lowest_dry = float_switch.height
                 break
         return (lowest_dry + highest_wet) / 2
+
+    @property
+    def float_switch_values(self):
+        return [{"height": float_switch.height, "wet": float_switch.is_wet()} for float_switch in self.float_switches]
