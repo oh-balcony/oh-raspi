@@ -39,7 +39,7 @@ def main():
             moisture_values_count = 0
             aggregated_values = aggregate_values(moisture_values)
             clear_values_map(moisture_values)
-            store(aggregated_values)
+            store_and_change_state(aggregated_values)
         processing_time = clock() - start_time
         sleep_time = max(measure_interval - processing_time, 0)
         sleep(sleep_time)
@@ -68,7 +68,7 @@ def clear_values_map(values_map):
         del values[:]
 
 
-def store(aggregated_values):
+def store_and_change_state(aggregated_values):
 
     water_level_values = {name: water_level.value for name, water_level in water_levels.items()}
     pump_values = {name: pump.is_active for name, pump in pumps.items()}
@@ -87,18 +87,44 @@ def store(aggregated_values):
 
     pprint(payload)
 
-    send(payload)
+    instructions = send_and_get_instructions(payload)
+
+    pprint(instructions)
+
+    pump_instructions = instructions["pumps"]
+    valve_instructions = instructions["valves"]
+
+    for name, pump in pumps.items():
+        if name in pump_instructions and pump_instructions[name]:
+            pump.on()
+        else:
+            pump.off()
+
+    for name, valve in valves.items():
+        if name in valve_instructions and valve_instructions[name]:
+            valve.open()
+        else:
+            valve.close()
+
+    for name, state in instructions["pumps"].items():
+        if name not in pumps:
+            logger.error("Ignoring instructions for unknown pump " + name)
+    for name, state in instructions["valves"].items():
+        if name not in valves:
+            logger.error("Ignoring instructions for unknown valve " + name)
 
 
-def send(payload):
+def send_and_get_instructions(payload):
     headers = {'content-type': 'application/json'}
+    instructions = {"pumps": {}, "valves": {}}  # default: all off/closed
     try:
         response = requests.post(get_service_endpoint("store"), data=json.dumps(payload), headers=headers, timeout=5.0)
         response.raise_for_status()
 
-        pprint(response.json())
+        instructions = response.json()
     except Exception as e:
         logger.exception("Communication error with server", e)
+    return instructions
 
 
 def get_service_endpoint(endpoint):
