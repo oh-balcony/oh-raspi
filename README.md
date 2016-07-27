@@ -30,3 +30,30 @@ Additionally the SPI kernel module will need to be enabled. Start the Raspberry 
 
 and select `Advanced Options` and then `SPI`. Afterwards the Pi will need to be rebooted for the changes to take effect.
 
+## Usage
+
+Clone the git repository:
+
+   git clone 
+
+### Configuration
+
+Copy the file `config.sample.py` to `config.py` and adapt it to your needs.
+
+### Starting
+
+Run:
+
+    ./main.py
+
+### Autostart
+
+To automatically start the script when the Raspberry Pi is rebooted, execute:
+
+    crontab -e
+
+... and then add the following line to the crontab:
+
+    @reboot sleep 5 && screen -dmS oh-raspi /home/pi/scripts/oh-raspi/main.py
+
+(Replace the full path to the script with the location where you installed it.)
