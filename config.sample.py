@@ -64,7 +64,7 @@ water_levels = {
 service_base_url = "http://lavendulus:8080"
 
 # time interval for sending moisture measurements to the server (seconds)
-send_measurements_interval = 300  # seconds
+send_measurements_interval = 60  # seconds
 
 # number of measurements that should be aggregated before sending them to the server
-aggregated_measurements_count = 30
+aggregated_measurements_count = 6  # default: 6 per minute, i.e. measuring every 10 seconds
