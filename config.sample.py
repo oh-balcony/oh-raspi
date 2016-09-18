@@ -1,7 +1,7 @@
 # Configuration File
 
 # This is the sample configuration file, that I (Hermann) am using for my setup.
-# Copy it to 'config.py' and and adapt it to your needs.
+# Copy it to 'config.py' and adapt it to your needs.
 
 from components import *
 
