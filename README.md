@@ -4,6 +4,8 @@ Python code for my Raspberry Pi to control the watering of plants on my balcony.
 
 This is part of the [Oh, Balcony!](http://oh-balcony.github.io/) project.
 
+The software allows the control of one or multiple pumps (to pump water from a water tank), valves (to control the flow of water through a system of water hoses), soil moisture sensors (for measuring whether plants should be watered) and water level sensors (for measuring the water level in the tank).
+
 ## Prerequisites
 
 If you haven't installed an Operations System on your Raspberry Pi then follow my instructions here: [Raspberry Pi Installation](https://github.com/oh-balcony/oh-balcony.github.io/wiki/Raspberry-Pi-Installation)
