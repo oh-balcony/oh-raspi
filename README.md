@@ -2,6 +2,8 @@
 
 Python code for my Raspberry Pi to control the watering of plants on my balcony.
 
+This is part of the [Oh, Balcony!](http://oh-balcony.github.io/) project.
+
 ## Prerequisites
 
 If you haven't installed an Operations System on your Raspberry Pi then follow my instructions here: [Raspberry Pi Installation](https://github.com/oh-balcony/oh-balcony.github.io/wiki/Raspberry-Pi-Installation)
