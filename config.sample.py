@@ -13,7 +13,7 @@ from gpiozero import MCP3008
 # moisture_sensors = {}
 
 moisture_sensors = {
-    # Moisture sensors YL-69, connected via MCP3008 ADC channel 0-6, 1.0 when dry
+    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 0-6, 1.0 when dry
     "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
     "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
     "moisture2": MoistureSensor(MCP3008(channel=2), inverse=True),
@@ -22,7 +22,7 @@ moisture_sensors = {
     # "moisture5": MoistureSensor(MCP3008(channel=5), inverse=True),
     # "moisture6": MoistureSensor(MCP3008(channel=6), inverse=True),
 
-    # Moisture sensor v1.4 (Conrad), connected via MCP3008 ADC channel 7, 0.0 when dry
+    # Seeed Studio SEN92355P moisture sensor, connected via MCP3008 ADC channel 7, 0.0 when dry
     "moisture7": MoistureSensor(MCP3008(channel=7))
 }
 
