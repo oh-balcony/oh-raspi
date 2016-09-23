@@ -8,7 +8,7 @@ The software allows the control of one or multiple pumps (to pump water from a w
 
 ## Prerequisites
 
-If you haven't installed an Operations System on your Raspberry Pi then follow my instructions here: [Raspberry Pi Installation](https://github.com/oh-balcony/oh-balcony.github.io/wiki/Raspberry-Pi-Installation)
+If you haven't installed an Operating System on your Raspberry Pi then follow my instructions here: [Raspberry Pi Installation](https://github.com/oh-balcony/oh-balcony.github.io/wiki/Raspberry-Pi-Installation)
 
 The following additional software packages will be required:
 
