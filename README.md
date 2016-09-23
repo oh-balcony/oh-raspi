@@ -38,7 +38,7 @@ and select `Advanced Options` and then `SPI`. Afterwards the Pi will need to be 
 
 Clone the git repository:
 
-   git clone 
+    git clone 
 
 ### Configuration
 
