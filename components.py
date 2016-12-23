@@ -90,7 +90,7 @@ class FloatSwitch:
     :param int pin:
         The GPIO pin (in BCM numbering) the switch is connected to.
 
-    :param float height:
+    :param int height:
         The installation height of the float switch within the water tank specified as a value between 0 and 100.
         0 is the very bottom of the tank and 100 the top of the tank. (Consequently 50 is the middle of the tank.)
 
