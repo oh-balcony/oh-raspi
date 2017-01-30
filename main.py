@@ -122,8 +122,8 @@ def send_and_get_instructions(payload):
         response.raise_for_status()
 
         instructions = response.json()
-    except Exception as e:
-        logger.exception("Communication error with server", e)
+    except:
+        logger.exception("Communication error with server")
     return instructions
 
 
