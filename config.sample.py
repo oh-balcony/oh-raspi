@@ -13,8 +13,10 @@ from gpiozero import MCP3008
 # moisture_sensors = {}
 
 moisture_sensors = {
-    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 0-6, 1.0 when dry
+    # DFRobot Capacitive Soil Moisture Sensor
     "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
+
+    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 1-6, 1.0 when dry
     "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
     "moisture2": MoistureSensor(MCP3008(channel=2), inverse=True),
     # "moisture3": MoistureSensor(MCP3008(channel=3), inverse=True),
@@ -54,9 +56,9 @@ valves = {
 # See class WaterLevel and FloatSwitch in components.py for all possible parameters.
 water_levels = {
     "tank1": WaterLevel([
-        FloatSwitch(pin=16, height=0),
+        FloatSwitch(pin=21, height=0),
         FloatSwitch(pin=20, height=50),
-        FloatSwitch(pin=21, height=100)
+        FloatSwitch(pin=16, height=100)
     ])
 }
 
