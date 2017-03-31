@@ -13,7 +13,7 @@ from gpiozero import MCP3008
 # moisture_sensors = {}
 
 moisture_sensors = {
-    # DFRobot Capacitive Soil Moisture Sensor
+    # DFRobot Capacitive Soil Moisture Sensor, 1.0 when dry
     "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
 
     # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 1-6, 1.0 when dry
