@@ -13,19 +13,14 @@ from gpiozero import MCP3008
 # moisture_sensors = {}
 
 moisture_sensors = {
-    # DFRobot Capacitive Soil Moisture Sensor, 1.0 when dry
+    # DFRobot Capacitive Soil Moisture Sensor, connected via MCP3008 ADC channel 0, 1.0 when dry
     "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
 
-    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 1-6, 1.0 when dry
-    "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
-    "moisture2": MoistureSensor(MCP3008(channel=2), inverse=True),
-    # "moisture3": MoistureSensor(MCP3008(channel=3), inverse=True),
-    # "moisture4": MoistureSensor(MCP3008(channel=4), inverse=True),
-    # "moisture5": MoistureSensor(MCP3008(channel=5), inverse=True),
-    # "moisture6": MoistureSensor(MCP3008(channel=6), inverse=True),
+    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 1, 1.0 when dry
+    # "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
 
-    # Seeed Studio SEN92355P moisture sensor, connected via MCP3008 ADC channel 7, 0.0 when dry
-    "moisture7": MoistureSensor(MCP3008(channel=7))
+    # Seeed Studio SEN92355P moisture sensor, connected via MCP3008 ADC channel 2, 0.0 when dry
+    # "moisture2": MoistureSensor(MCP3008(channel=7))
 }
 
 # Empirical values for Moisture sensors:
