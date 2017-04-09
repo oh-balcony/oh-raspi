@@ -58,7 +58,7 @@ water_levels = {
 }
 
 # Web Service endpoint
-service_base_url = "http://lavendulus:8080"
+service_base_url = "http://gerty:8080/api/"
 
 # time interval for sending moisture measurements to the server (seconds)
 send_measurements_interval = 60  # seconds

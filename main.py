@@ -118,7 +118,7 @@ def send_and_get_instructions(payload):
     headers = {'content-type': 'application/json'}
     instructions = {"pumps": {}, "valves": {}}  # default: all off/closed
     try:
-        response = requests.post(get_service_endpoint("store"), data=json.dumps(payload), headers=headers, timeout=5.0)
+        response = requests.post(get_service_endpoint("updateControllerState"), data=json.dumps(payload), headers=headers, timeout=5.0)
         response.raise_for_status()
 
         instructions = response.json()
