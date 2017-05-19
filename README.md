@@ -38,7 +38,11 @@ Additionally the SPI kernel module will need to be enabled. Start the Raspberry 
 
 and select `Interfacing Options` and then `SPI`.
 
-If a 1-wire temperature sensor (DS18S20, DS1822, DS18B20, DS28EA00, DS1825/MAX31850K) is used, then also the 1-Wire interface needs to be enabled under `Interfacing Options` and then `1-Wire`.
+If a 1-wire temperature sensor (DS18S20, DS1822, DS18B20, DS28EA00, DS1825/MAX31850K) is used, then enable also the 1-wire interface. For that add the following line to the file `/boot/config.txt`:
+
+    dtoverlay=w1-gpio,gpiopin=4,pullup=on
+    
+Note: the `pullup=on` is required if you connected the sensor with a parasitic circuit (GND and VDD connected) as described by [Martin Kompf](https://www.kompf.de/weather/pionewiremini.html). With a non-parasitic circuit it is not needed, as described by [Adafruit](https://cdn-learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing.pdf).
 
 Afterwards the Pi will need to be rebooted for the configuration changes to take effect.
 
