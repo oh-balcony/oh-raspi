@@ -14,25 +14,33 @@ The following additional software packages will be required:
 
 Python 3:
 
-    sudo apt-get install python3
+    sudo apt install python3
     
 Python [requests HTTP library](http://docs.python-requests.org):
 
-    sudo apt-get install python3-requests
+    sudo apt install python3-requests
 
 Python [gpiozero library](http://gpiozero.readthedocs.io):
 
-    sudo apt-get install python3-gpiozero
+    sudo apt install python3-gpiozero
+
+Python [w1thermsensor library](https://github.com/timofurrer/w1thermsensor):
+
+    sudo apt install python3-w1thermsensor
 
 Python spidev library, which is needed for hardware accelerated SPI. It will also work without, but reading Soil Moisture sensors through an MCP3008 Analog-Digital Converter (ADC) will be a little slower (I measured 1.4ms instead of 0.04ms per reading):
 
-    sudo apt-get install python3-spidev
+    sudo apt install python3-spidev
 
 Additionally the SPI kernel module will need to be enabled. Start the Raspberry Pi configuration tool with
 
     sudo raspi-config
 
-and select `Advanced Options` and then `SPI`. Afterwards the Pi will need to be rebooted for the changes to take effect.
+and select `Interfacing Options` and then `SPI`.
+
+If a 1-wire temperature sensor (DS18S20, DS1822, DS18B20, DS28EA00, DS1825/MAX31850K) is used, then also the 1-Wire interface needs to be enabled under `Interfacing Options` and then `1-Wire`.
+
+Afterwards the Pi will need to be rebooted for the configuration changes to take effect.
 
 ## Usage
 
