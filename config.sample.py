@@ -5,7 +5,12 @@
 
 from components import *
 
+# MCP3008 ADC chip - use a different import if you are using a different chip
+# (see http://gpiozero.readthedocs.io/en/stable/api_spi.html#analog-to-digital-converters-adc )
 from gpiozero import MCP3008
+
+# needed for 1-wire temperature sensor
+from w1thermsensor import W1ThermSensor
 
 # Moisture Sensors connected via Analog-Digital-Converter (ADC) chips.
 # See class MoistureSensor in components.py for all possible parameters.
@@ -13,14 +18,19 @@ from gpiozero import MCP3008
 # moisture_sensors = {}
 
 moisture_sensors = {
-    # DFRobot Capacitive Soil Moisture Sensor, connected via MCP3008 ADC channel 0, 1.0 when dry
-    "moisture0": MoistureSensor(MCP3008(channel=0), inverse=True),
+    # 2 resistors setup as voltage dividers. Useful for testing the MCP3008 ADC. Connected to channel 0
+    #"resistor": MoistureSensor(MCP3008(channel=0)),
 
-    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 1, 1.0 when dry
-    # "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
+    # DFRobot Capacitive Soil Moisture Sensors, connected via MCP3008 ADC channel 1-3, 1.0 when dry
+    "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
+    "moisture2": MoistureSensor(MCP3008(channel=2), inverse=True),
+    "moisture3": MoistureSensor(MCP3008(channel=3), inverse=True),
 
-    # Seeed Studio SEN92355P moisture sensor, connected via MCP3008 ADC channel 2, 0.0 when dry
-    # "moisture2": MoistureSensor(MCP3008(channel=7))
+    # Moisture sensors YL-69 (China), connected via MCP3008 ADC channel 6, 1.0 when dry
+    #"moisture6": MoistureSensor(MCP3008(channel=6), inverse=True),
+
+    # Seeed Studio SEN92355P moisture sensor, connected via MCP3008 ADC channel 7, 0.0 when dry
+    #"moisture7": MoistureSensor(MCP3008(channel=7))
 }
 
 # Empirical values for Moisture sensors:
@@ -44,7 +54,10 @@ pumps = {
 # Valves controlling the flow of water
 # See class Valve in components.py for all possible parameters.
 valves = {
-    "valve1": Valve(17)
+    "valve1": Valve(5),
+    "valve2": Valve(6),
+    "valve3": Valve(13),
+    "valve4": Valve(19)
 }
 
 # Tanks with installed float switches for measuring the water level
@@ -55,6 +68,14 @@ water_levels = {
         FloatSwitch(pin=20, height=50),
         FloatSwitch(pin=16, height=100)
     ])
+}
+
+# Temperature sensors
+temperature_sensors = {
+    # Just select the first found 1-Wire temperature sensor
+    # To select sensors explicitly see https://github.com/timofurrer/w1thermsensor
+    # If no temperature sensor is connected, then just comment out the next line
+    "temperature1": W1ThermSensor()
 }
 
 # Web Service endpoint

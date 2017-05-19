@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
 from time import sleep, clock
-from pprint import pprint
+from pprint import pprint, pformat
 from statistics import median
 import json
 import requests
 import logging
 
+logging.basicConfig(format='%(asctime)s %(levelname)s\t%(message)s', level=logging.WARNING)
 logger = logging.getLogger('oh-balcony')
+logger.setLevel(logging.INFO)
 
 try:
     from config import *
@@ -29,17 +31,21 @@ def main():
           "values and sending them to the server every", send_measurements_interval, "seconds.")
 
     moisture_values = {moistureSensorName: [] for moistureSensorName in moisture_sensors.keys()}
-    moisture_values_count = 0
+    temperature_values = {temperatureSensorName: [] for temperatureSensorName in temperature_sensors.keys()}
+    values_count = 0
 
     while True:
         start_time = clock()
         measure_moisture(moisture_values)
-        moisture_values_count += 1
-        if moisture_values_count >= aggregated_measurements_count:
-            moisture_values_count = 0
-            aggregated_values = aggregate_values(moisture_values)
+        measure_temperature(temperature_values)
+        values_count += 1
+        if values_count >= aggregated_measurements_count:
+            values_count = 0
+            aggregated_moisture_values = aggregate_values(moisture_values)
+            aggregated_temperature_values = aggregate_values(temperature_values)
             clear_values_map(moisture_values)
-            store_and_change_state(aggregated_values)
+            clear_values_map(temperature_values)
+            store_and_change_state(aggregated_moisture_values, aggregated_temperature_values)
         processing_time = clock() - start_time
         sleep_time = max(measure_interval - processing_time, 0)
         sleep(sleep_time)
@@ -59,6 +65,12 @@ def measure_moisture(moisture_values):
         moisture_values[name].append(value)
 
 
+def measure_temperature(temperature_values):
+    for name, sensor in temperature_sensors.items():
+        value = sensor.get_temperature()
+        temperature_values[name].append(value)
+
+
 def aggregate_values(values_map):
     return {name: median(values) for name, values in values_map.items()}
 
@@ -68,13 +80,14 @@ def clear_values_map(values_map):
         del values[:]
 
 
-def store_and_change_state(aggregated_values):
+def store_and_change_state(aggregated_moisture_values, aggregated_temperature_values):
 
     water_level_values = {name: water_level.value for name, water_level in water_levels.items()}
     pump_values = {name: pump.is_active for name, pump in pumps.items()}
     valve_values = {name: valve.is_open for name, valve in valves.items()}
 
-    payload = {"moisture": aggregated_values,
+    payload = {"moisture": aggregated_moisture_values,
+               "temperature": aggregated_temperature_values,
                "tanks": water_level_values,
                "pumps": pump_values,
                "valves": valve_values}
@@ -85,11 +98,13 @@ def store_and_change_state(aggregated_values):
     #     pprint(water_level.float_switch_values)
     # pprint(water_level_values)
 
-    pprint(payload)
+    # pprint(payload)
+
+    logger.info("Send: " + pformat(payload))
 
     instructions = send_and_get_instructions(payload)
 
-    pprint(instructions)
+    logger.info("Receive: " + pformat(pformat(instructions)))
 
     pump_instructions = instructions["pumps"]
     valve_instructions = instructions["valves"]
@@ -133,29 +148,5 @@ def get_service_endpoint(endpoint):
     else:
         return service_base_url + "/" + endpoint
 
-
-# TODO
-# pumps["pump1"].on()
-# sleep(100)
-
-# valve = valves["valve1"]
-# print("Initial")
-# sleep(2)
-# while True:
-#     print("Close")
-#     valve.close()
-#     sleep(2)
-#     print("Open")
-#     valve.open()
-#     sleep(2)
-
-# float_switch = FloatSwitch(27, active_wet=False)
-# while True:
-#     print("Wet? " + str(float_switch.is_wet()))
-#     sleep(0.5)
-
-# while True:
-#     print(water_levels["tank1"].value)
-#     sleep(0.2)
 
 main()
