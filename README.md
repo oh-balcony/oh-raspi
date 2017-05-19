@@ -72,4 +72,4 @@ To automatically start the script when the Raspberry Pi is rebooted, execute:
 
 Prerequisite: screen needs to be installed:
 
-    sudo apt-get install screen
+    sudo apt install screen
