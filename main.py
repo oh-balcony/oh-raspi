@@ -104,7 +104,7 @@ def store_and_change_state(aggregated_moisture_values, aggregated_temperature_va
 
     instructions = send_and_get_instructions(payload)
 
-    logger.info("Receive: " + pformat(pformat(instructions)))
+    logger.info("Receive: " + pformat(instructions))
 
     pump_instructions = instructions["pumps"]
     valve_instructions = instructions["valves"]
@@ -133,7 +133,7 @@ def send_and_get_instructions(payload):
     headers = {'content-type': 'application/json'}
     instructions = {"pumps": {}, "valves": {}}  # default: all off/closed
     try:
-        response = requests.post(get_service_endpoint("updateControllerState"), data=json.dumps(payload), headers=headers, timeout=5.0)
+        response = requests.post(get_service_endpoint("updateControllerState/" + controller_name), data=json.dumps(payload), headers=headers, timeout=5.0)
         response.raise_for_status()
 
         instructions = response.json()

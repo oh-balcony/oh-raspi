@@ -12,6 +12,8 @@ from gpiozero import MCP3008
 # needed for 1-wire temperature sensor
 from w1thermsensor import W1ThermSensor
 
+controller_name = "controller1"
+
 # Moisture Sensors connected via Analog-Digital-Converter (ADC) chips.
 # See class MoistureSensor in components.py for all possible parameters.
 # If you have no Moisture Sensors connected, then assign this to an empty dictionary:
@@ -19,7 +21,7 @@ from w1thermsensor import W1ThermSensor
 
 moisture_sensors = {
     # 2 resistors setup as voltage dividers. Useful for testing the MCP3008 ADC. Connected to channel 0
-    #"resistor": MoistureSensor(MCP3008(channel=0)),
+    "widerstand": MoistureSensor(MCP3008(channel=0)),
 
     # DFRobot Capacitive Soil Moisture Sensors, connected via MCP3008 ADC channel 1-3, 1.0 when dry
     "moisture1": MoistureSensor(MCP3008(channel=1), inverse=True),
