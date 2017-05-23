@@ -3,3 +3,6 @@
 
 # config.py should not be checked in as every user will have a different one
 /config.py
+
+/*.log
+/*.log.*
