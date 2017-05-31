@@ -84,7 +84,7 @@ temperature_sensors = {
 service_base_url = "http://gerty:8080/api/"
 
 # time interval for sending moisture measurements to the server (seconds)
-send_measurements_interval = 60  # seconds
+send_measurements_interval = 20  # seconds
 
 # number of measurements that should be aggregated before sending them to the server
 aggregated_measurements_count = 6  # default: 6 per minute, i.e. measuring every 10 seconds

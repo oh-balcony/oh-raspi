@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from time import sleep, clock
-from pprint import pprint, pformat
+from time import sleep, time
+from pprint import pformat
 from statistics import median
 import json
 import requests
@@ -35,7 +35,7 @@ def main():
     values_count = 0
 
     while True:
-        start_time = clock()
+        start_time = time()
         measure_moisture(moisture_values)
         measure_temperature(temperature_values)
         values_count += 1
@@ -46,7 +46,7 @@ def main():
             clear_values_map(moisture_values)
             clear_values_map(temperature_values)
             store_and_change_state(aggregated_moisture_values, aggregated_temperature_values)
-        processing_time = clock() - start_time
+        processing_time = time() - start_time
         sleep_time = max(measure_interval - processing_time, 0)
         sleep(sleep_time)
 
@@ -93,12 +93,9 @@ def store_and_change_state(aggregated_moisture_values, aggregated_temperature_va
                "valves": valve_values}
 
     # debugging output for float switches
-    # for name, water_level in water_levels.items():
-    #     print(name + ": ")
-    #     pprint(water_level.float_switch_values)
-    # pprint(water_level_values)
-
-    # pprint(payload)
+    for name, water_level in water_levels.items():
+        logger.info(name + ": " + pformat(water_level.float_switch_values))
+    logger.info(pformat(water_level_values))
 
     logger.info("Send: " + pformat(payload))
 
