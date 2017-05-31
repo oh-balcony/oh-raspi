@@ -67,7 +67,11 @@ def measure_moisture(moisture_values):
 
 def measure_temperature(temperature_values):
     for name, sensor in temperature_sensors.items():
-        value = sensor.get_temperature()
+        value = 0
+        try:
+            value = sensor.get_temperature()
+        except:
+            logger.exception("Error reading temperature sensor")
         temperature_values[name].append(value)
 
 
