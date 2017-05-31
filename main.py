@@ -95,7 +95,6 @@ def store_and_change_state(aggregated_moisture_values, aggregated_temperature_va
     # debugging output for float switches
     for name, water_level in water_levels.items():
         logger.info(name + ": " + pformat(water_level.float_switch_values))
-    logger.info(pformat(water_level_values))
 
     logger.info("Send: " + pformat(payload))
 
