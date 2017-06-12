@@ -77,7 +77,10 @@ temperature_sensors = {
     # Just select the first found 1-Wire temperature sensor
     # To select sensors explicitly see https://github.com/timofurrer/w1thermsensor
     # If no temperature sensor is connected, then just comment out the next line
-    "temperature1": W1ThermSensor()
+    "temperature1": W1ThermSensor(),
+
+    # This is the CPU temperature of the Raspberry Pi
+    "cpu": CPUTemperature()
 }
 
 # Web Service endpoint
@@ -87,4 +90,4 @@ service_base_url = "http://gerty:8080/api/"
 send_measurements_interval = 20  # seconds
 
 # number of measurements that should be aggregated before sending them to the server
-aggregated_measurements_count = 6  # default: 6 per minute, i.e. measuring every 10 seconds
+aggregated_measurements_count = 4  # default: 4 per 20 seconds, i.e. measuring every 5 seconds

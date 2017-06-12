@@ -161,3 +161,13 @@ class WaterLevel:
     @property
     def float_switch_values(self):
         return [{"height": float_switch.height, "wet": float_switch.is_wet()} for float_switch in self.float_switches]
+
+
+class CPUTemperature:
+    """
+    Reads the CPU temperature of the Raspberry Pi
+    """
+
+    def get_temperature(self) -> float:
+        with open('/sys/class/thermal/thermal_zone0/temp', 'r') as temperature_file:
+            return float(temperature_file.read()) / 1000
