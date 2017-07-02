@@ -74,7 +74,7 @@ To automatically start the script when the Raspberry Pi is rebooted, execute:
 
 (Replace the full path to the script with the location where you installed it.)
 
-#### Logrotate
+### Logrotate
 
 To avoid that the log file grows infinite create the following logrotate rule as `/etc/logrotate.d/oh-raspi`:
 
