@@ -83,8 +83,8 @@ temperature_sensors = {
     "cpu": CPUTemperature()
 }
 
-# Web Service endpoint
-service_base_url = "http://gerty:8080/api/"
+# Web Service endpoint (oh-balcony-server)
+service_base_url = "http://localhost:8080/api/"
 
 # time interval for sending moisture measurements to the server (seconds)
 send_measurements_interval = 20  # seconds
