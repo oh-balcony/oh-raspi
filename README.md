@@ -56,6 +56,12 @@ Clone the git repository:
 
 Copy the file `config.sample.py` to `config.py` and adapt it to your needs.
 
+### Testing
+
+To manually test reading sensor values and turning on/off irrigation, start in testing mode:
+
+    ./test.sh
+
 ### Starting
 
 Run:
